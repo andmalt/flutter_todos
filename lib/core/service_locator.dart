@@ -13,12 +13,13 @@ import '../domain/usercases/get_todo.dart';
 
 final sl = GetIt.instance;
 
-void setupServiceLocator() {
+Future<void> setupServiceLocator() async {
   // External
   sl.registerLazySingleton(() => http.Client());
 
   // Data Sources
-  sl.registerLazySingleton(() => AppDatabase());
+  final appDatabase = await getAppDatabase();
+  sl.registerLazySingleton(() => AppDatabase(appDatabase.executor));
   sl.registerLazySingleton<DriftDataSource>(
     () => DriftDataSource(sl<AppDatabase>()),
   );

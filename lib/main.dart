@@ -6,8 +6,10 @@ import 'blocs/todos/todo_bloc.dart';
 import 'blocs/todos/todo_event.dart';
 import 'core/service_locator.dart';
 
-void main() {
-  setupServiceLocator();
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await setupServiceLocator();
+
   runApp(const MyApp());
 }
 
