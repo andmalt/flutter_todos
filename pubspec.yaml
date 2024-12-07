@@ -42,6 +42,8 @@ dependencies:
   freezed: ^2.5.2
   drift: ^2.21.0
   drift_flutter: ^0.2.2
+  go_router: ^14.6.2
+  get_it: ^8.0.2
 
 dev_dependencies:
   flutter_test:
