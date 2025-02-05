@@ -1,6 +1,6 @@
 # flutter_todos
 
-`flutter_todos` is a simple and intuitive to-do list application built using Flutter. This project demonstrates the use of Flutter to create a cross-platform application that runs on Android, iOS, web, and desktop platforms. The project utilizes the BLoC pattern for state management, Drift for persistence built on top of SQLite and the Freezed library for immutable data classes.
+`flutter_todos` is a simple and intuitive to-do list application built using Flutter. This project demonstrates the use of Flutter to create a cross-platform application that runs on Android, iOS and desktop platforms. The project utilizes the BLoC pattern for state management, Drift for persistence built on top of SQLite and the Freezed library for immutable data classes.
 
 ## Getting Started
 
