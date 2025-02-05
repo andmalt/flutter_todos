@@ -5,20 +5,20 @@ part 'todo_event.freezed.dart';
 
 @freezed
 class TodoEvent with _$TodoEvent {
-  /// Evento per il caricamento iniziale
+  /// Event for initial loading
   const factory TodoEvent.load({
     @Default(20) int limit,
     @Default(0) int offset,
   }) = LoadToDoEvent;
 
-  /// Evento per il caricamento incrementale
+  /// Event for incremental uploading
   const factory TodoEvent.loadMore({
     @Default(20) int limit,
   }) = LoadMoreToDoEvent;
 
-  /// Evento per aggiornare un ToDo
+  /// Event to update a ToDo
   const factory TodoEvent.update(ToDoModel todo) = UpdateToDoEvent;
 
-  /// Evento per eliminare un ToDo
+  /// Event to remove a ToDo
   const factory TodoEvent.delete(ToDoModel todo) = DeleteToDoEvent;
 }

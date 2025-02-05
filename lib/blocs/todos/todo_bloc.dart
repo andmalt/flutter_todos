@@ -47,7 +47,7 @@ class ToDoBloc extends Bloc<TodoEvent, TodoState> {
 
   Future<void> _onLoadMoreToDoEvent(
       LoadMoreToDoEvent event, Emitter<TodoState> emit) async {
-    // Controlla che lo stato sia `loaded`
+    // Check that the status is `loaded`
     final currentState = state.maybeMap(
       loaded: (state) => state,
       orElse: () => null,
@@ -55,11 +55,11 @@ class ToDoBloc extends Bloc<TodoEvent, TodoState> {
 
     if (currentState == null || currentState.isLoadingMore) return;
 
-    // Aggiorna lo stato con `isLoadingMore: true`
+    // Update the state with `isLoadingMore: true`
     emit(currentState.copyWith(isLoadingMore: true));
 
     try {
-      // Attendi il caricamento dei nuovi ToDos
+      // Wait for new ToDos to load
       final todos = await getToDos(
         limit: event.limit,
         offset: currentState.todos.length,
@@ -74,7 +74,7 @@ class ToDoBloc extends Bloc<TodoEvent, TodoState> {
             ),
           )
           .toList();
-      // Controlla se `emit` è ancora valido
+      // Check if `emit` is still valid
       if (!emit.isDone) {
         emit(currentState.copyWith(
           todos: [...currentState.todos, ...newTodos],
@@ -83,7 +83,7 @@ class ToDoBloc extends Bloc<TodoEvent, TodoState> {
         ));
       }
     } catch (error) {
-      // Gestisci gli errori
+      // Handle errors
       if (!emit.isDone) {
         emit(TodoState.error(error.toString()));
       }
@@ -122,7 +122,7 @@ class ToDoBloc extends Bloc<TodoEvent, TodoState> {
     if (currentState == null) return;
 
     try {
-      // Rimuovi il todo dall'elenco
+      // Remove todo from the list
       final updatedTodos =
           currentState.todos.where((todo) => todo.id != event.todo.id).toList();
       final todo = ToDoEntity.fromModel(event.todo);

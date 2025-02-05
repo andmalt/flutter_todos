@@ -39,6 +39,10 @@ class _ToDoPageState extends State<ToDoPage> {
     );
   }
 
+  Future<void> _refreshList() async {
+    context.read<ToDoBloc>().add(const LoadToDoEvent());
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,9 +70,7 @@ class _ToDoPageState extends State<ToDoPage> {
             ),
             loaded: (todos, isLoadingMore, hasMore) => RefreshIndicator(
               color: Colors.deepPurple,
-              onRefresh: () async {
-                context.read<ToDoBloc>().add(const LoadToDoEvent());
-              },
+              onRefresh: _refreshList,
               child: ListView.builder(
                 controller: _scrollController,
                 itemCount: todos.length + (isLoadingMore ? 1 : 0),
@@ -85,7 +87,7 @@ class _ToDoPageState extends State<ToDoPage> {
                     );
                   }
                   final todo = todos[index];
-                  return _buildToDoCard(context, todo);
+                  return _buildToDoCard(todo);
                 },
               ),
             ),
@@ -105,7 +107,7 @@ class _ToDoPageState extends State<ToDoPage> {
     );
   }
 
-  Widget _buildToDoCard(BuildContext context, ToDoModel todo) {
+  Widget _buildToDoCard(ToDoModel todo) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
       child: Card(
@@ -138,12 +140,12 @@ class _ToDoPageState extends State<ToDoPage> {
           trailing: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              // Pulsante di Modifica
+              // Edit button
               IconButton(
                 icon: const Icon(Icons.edit, color: Colors.blue),
-                onPressed: () => _showEditDialog(context, todo),
+                onPressed: () => _showEditDialog(todo),
               ),
-              // Pulsante di Eliminazione
+              // Delete button
               IconButton(
                 icon: const Icon(Icons.delete, color: Colors.red),
                 onPressed: () {
@@ -157,7 +159,7 @@ class _ToDoPageState extends State<ToDoPage> {
     );
   }
 
-  Future<void> _showEditDialog(BuildContext context, ToDoModel todo) async {
+  Future<void> _showEditDialog(ToDoModel todo) async {
     final controller = TextEditingController(text: todo.title);
     final newTitle = await showDialog<String>(
       context: context,
@@ -187,7 +189,7 @@ class _ToDoPageState extends State<ToDoPage> {
     );
 
     if (newTitle != null && newTitle.isNotEmpty) {
-      if (context.mounted) {
+      if (mounted) {
         context.read<ToDoBloc>().add(
               UpdateToDoEvent(
                 todo.copyWith(title: controller.text),

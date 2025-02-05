@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_todos/router.dart';
 
 import 'blocs/todos/todo_bloc.dart';
-import 'blocs/todos/todo_event.dart';
 import 'core/service_locator.dart';
 
 void main() async {
@@ -20,7 +19,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => sl<ToDoBloc>()..add(const LoadToDoEvent()),
+      create: (context) => sl<ToDoBloc>(),
       child: MaterialApp.router(
         routerConfig: router,
       ),

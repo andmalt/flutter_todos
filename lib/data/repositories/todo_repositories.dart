@@ -33,22 +33,6 @@ class ToDoRepositoryImpl extends ToDoRepositories {
   }
 
   @override
-  Future<bool> deleteToDo(ToDoEntity todo) async {
-    final newToDo = ToDoModel(
-      id: todo.id,
-      userId: todo.userId,
-      title: todo.title,
-      completed: todo.completed,
-    );
-    try {
-      await localDataSource.deleteToDos(newToDo);
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-
-  @override
   Future<bool> updateToDo(List<ToDoEntity> todos) async {
     final newToDos = todos
         .map((e) => ToDoModel(
@@ -60,6 +44,22 @@ class ToDoRepositoryImpl extends ToDoRepositories {
         .toList();
     try {
       await localDataSource.saveToDos(newToDos);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  @override
+  Future<bool> deleteToDo(ToDoEntity todo) async {
+    final newToDo = ToDoModel(
+      id: todo.id,
+      userId: todo.userId,
+      title: todo.title,
+      completed: todo.completed,
+    );
+    try {
+      await localDataSource.deleteToDos(newToDo);
       return true;
     } catch (e) {
       return false;

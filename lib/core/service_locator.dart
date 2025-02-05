@@ -19,7 +19,7 @@ Future<void> setupServiceLocator() async {
 
   // Data Sources
   final appDatabase = await getAppDatabase();
-  sl.registerLazySingleton(() => AppDatabase(appDatabase.executor));
+  sl.registerLazySingleton<AppDatabase>(() => appDatabase);
   sl.registerLazySingleton<DriftDataSource>(
     () => DriftDataSource(sl<AppDatabase>()),
   );
