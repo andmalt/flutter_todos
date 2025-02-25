@@ -16,8 +16,6 @@ Before you begin, ensure you have met the following requirements:
 - For iOS development:
   - Install [Xcode](https://developer.apple.com/xcode/)
   - Set up the iOS simulator or connect an iOS device
-- For Web development:
-  - Use a modern web browser like Chrome, Firefox, or Edge
 - For Windows development:
   - Install the [Visual Studio](https://visualstudio.microsoft.com/) with the "Desktop development with C++" workload
 - For macOS development:
@@ -52,10 +50,6 @@ To run the application on your desired platform, use the following commands:
 - For iOS:
     ```sh
     flutter run
-    ```
-- For Web:
-    ```sh
-    flutter run -d chrome
     ```
 - For Windows:
     ```sh
