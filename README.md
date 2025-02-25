@@ -66,13 +66,21 @@ To run the application on your desired platform, use the following commands:
 
 ### Folder Descriptions
 
-- **`main.dart`**: The main entry point of the application where the app is initialized.
-- `models/`: Contains the data models used in the application.
-- `screens/`: Contains the different UI screens of the application.
-- `widgets/`: Contains reusable widgets used across the application.
-- `services/`: Contains business logic and services.
-- `utils/`: Contains utility functions.
-- `blocs/`: Contains BLoC classes for state management.
+- `lib/`: Main directory containing the source code of the application.
+  - **`main.dart`**: The main entry point of the application where the app is initialized.
+  - `core/`: Manages the configuration and initialization of application services. 
+  - `blocs/`: It contains the BLoC (Business Logic Component) classes responsible for managing state and presentation logic, facilitating the separation of business logic and user interface.
+  - `data/`: Manages data access and management. Includes:
+    - `models/`: Contains the data models used in the application.
+    - `repositories/`: Concrete implementations of repositories that provide methods for accessing data from different sources.
+    - `datasources/`: External or local data sources, such as REST APIs or SQLite databases.
+  - `domain/`: Contains the business logic of the application. Includes:
+    - `entities/`: Classes representing the fundamental entities of the domain.
+    - `repositories/`: Interfaces that define contracts for data access, implemented in the `data` layer.
+    - `usecases/`: Use cases that encapsulate specific business operations or application functionality.
+  - `presentation/`: Manages user interface and data presentation. Includes:
+    - `pages/`: Pages of the application that representing different views.
+    - `widgets/`: Reusable UI components within pages.
 
 ## Used libraries and technologies
 

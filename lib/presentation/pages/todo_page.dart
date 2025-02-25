@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_todos/data/models/todo.dart';
+import 'package:flutter_todos/presentation/widgets/todo_list.dart';
 
 import '../../blocs/todos/todo_bloc.dart';
 import '../../blocs/todos/todo_event.dart';
@@ -71,24 +71,11 @@ class _ToDoPageState extends State<ToDoPage> {
             loaded: (todos, isLoadingMore, hasMore) => RefreshIndicator(
               color: Colors.deepPurple,
               onRefresh: _refreshList,
-              child: ListView.builder(
-                controller: _scrollController,
-                itemCount: todos.length + (isLoadingMore ? 1 : 0),
-                itemBuilder: (context, index) {
-                  if (index == todos.length && isLoadingMore) {
-                    return const Center(
-                      child: Padding(
-                        padding: EdgeInsets.all(16.0),
-                        child: CircularProgressIndicator(
-                          valueColor:
-                              AlwaysStoppedAnimation<Color>(Colors.deepPurple),
-                        ),
-                      ),
-                    );
-                  }
-                  final todo = todos[index];
-                  return _buildToDoCard(todo);
-                },
+              child: ToDoList(
+                todos: todos,
+                isLoadingMore: isLoadingMore,
+                hasMore: hasMore,
+                scrollController: _scrollController,
               ),
             ),
             error: (message) => Center(
@@ -105,98 +92,6 @@ class _ToDoPageState extends State<ToDoPage> {
         },
       ),
     );
-  }
-
-  Widget _buildToDoCard(ToDoModel todo) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
-      child: Card(
-        elevation: 4,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15),
-        ),
-        child: ListTile(
-          leading: CircleAvatar(
-            backgroundColor: todo.completed ? Colors.green : Colors.red,
-            child: Icon(
-              todo.completed ? Icons.check : Icons.clear,
-              color: Colors.white,
-            ),
-          ),
-          title: Text(
-            todo.title,
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          subtitle: Text(
-            'User: ${todo.userId}',
-            style: const TextStyle(
-              fontSize: 14,
-              color: Colors.grey,
-            ),
-          ),
-          trailing: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              // Edit button
-              IconButton(
-                icon: const Icon(Icons.edit, color: Colors.blue),
-                onPressed: () => _showEditDialog(todo),
-              ),
-              // Delete button
-              IconButton(
-                icon: const Icon(Icons.delete, color: Colors.red),
-                onPressed: () {
-                  context.read<ToDoBloc>().add(DeleteToDoEvent(todo));
-                },
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Future<void> _showEditDialog(ToDoModel todo) async {
-    final controller = TextEditingController(text: todo.title);
-    final newTitle = await showDialog<String>(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: const Text('Edit ToDo'),
-          content: TextField(
-            controller: controller,
-            decoration: const InputDecoration(
-              hintText: 'Enter new title',
-            ),
-            minLines: 1,
-            maxLines: 3,
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context, null),
-              child: const Text('Cancel'),
-            ),
-            TextButton(
-              onPressed: () => Navigator.pop(context, controller.text),
-              child: const Text('Save'),
-            ),
-          ],
-        );
-      },
-    );
-
-    if (newTitle != null && newTitle.isNotEmpty) {
-      if (mounted) {
-        context.read<ToDoBloc>().add(
-              UpdateToDoEvent(
-                todo.copyWith(title: controller.text),
-              ),
-            );
-      }
-    }
   }
 
   @override
