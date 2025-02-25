@@ -74,7 +74,7 @@ To run the application on your desired platform, use the following commands:
 - `utils/`: Contains utility functions.
 - `blocs/`: Contains BLoC classes for state management.
 
-## Acknowledgements
+## Used libraries and technologies
 
 - [Flutter](https://flutter.dev/)
 - [Drift](https://pub.dev/packages/drift)
