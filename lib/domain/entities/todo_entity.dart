@@ -1,5 +1,3 @@
-import '../../data/models/todo.dart';
-
 class ToDoEntity {
   final int id;
   final int userId;
@@ -12,13 +10,4 @@ class ToDoEntity {
     required this.title,
     required this.completed,
   });
-
-  factory ToDoEntity.fromModel(ToDoModel model) {
-    return ToDoEntity(
-      id: model.id,
-      userId: model.userId,
-      title: model.title,
-      completed: model.completed,
-    );
-  }
 }

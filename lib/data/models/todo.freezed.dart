@@ -25,8 +25,12 @@ mixin _$ToDoModel {
   String get title => throw _privateConstructorUsedError;
   bool get completed => throw _privateConstructorUsedError;
 
+  /// Serializes this ToDoModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ToDoModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ToDoModelCopyWith<ToDoModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -49,6 +53,8 @@ class _$ToDoModelCopyWithImpl<$Res, $Val extends ToDoModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ToDoModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -97,6 +103,8 @@ class __$$ToDoModelImplCopyWithImpl<$Res>
       _$ToDoModelImpl _value, $Res Function(_$ToDoModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ToDoModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -128,12 +136,13 @@ class __$$ToDoModelImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$ToDoModelImpl implements _ToDoModel {
+class _$ToDoModelImpl extends _ToDoModel {
   const _$ToDoModelImpl(
       {required this.id,
       required this.userId,
       required this.title,
-      required this.completed});
+      required this.completed})
+      : super._();
 
   factory _$ToDoModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$ToDoModelImplFromJson(json);
@@ -164,11 +173,13 @@ class _$ToDoModelImpl implements _ToDoModel {
                 other.completed == completed));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, userId, title, completed);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ToDoModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ToDoModelImplCopyWith<_$ToDoModelImpl> get copyWith =>
@@ -182,12 +193,13 @@ class _$ToDoModelImpl implements _ToDoModel {
   }
 }
 
-abstract class _ToDoModel implements ToDoModel {
+abstract class _ToDoModel extends ToDoModel {
   const factory _ToDoModel(
       {required final int id,
       required final int userId,
       required final String title,
       required final bool completed}) = _$ToDoModelImpl;
+  const _ToDoModel._() : super._();
 
   factory _ToDoModel.fromJson(Map<String, dynamic> json) =
       _$ToDoModelImpl.fromJson;
@@ -200,8 +212,11 @@ abstract class _ToDoModel implements ToDoModel {
   String get title;
   @override
   bool get completed;
+
+  /// Create a copy of ToDoModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ToDoModelImplCopyWith<_$ToDoModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
