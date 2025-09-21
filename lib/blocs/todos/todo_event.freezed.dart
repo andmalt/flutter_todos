@@ -83,6 +83,9 @@ class _$TodoEventCopyWithImpl<$Res, $Val extends TodoEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of TodoEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -102,6 +105,8 @@ class __$$LoadToDoEventImplCopyWithImpl<$Res>
       _$LoadToDoEventImpl _value, $Res Function(_$LoadToDoEventImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TodoEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -150,7 +155,9 @@ class _$LoadToDoEventImpl implements LoadToDoEvent {
   @override
   int get hashCode => Object.hash(runtimeType, limit, offset);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TodoEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$LoadToDoEventImplCopyWith<_$LoadToDoEventImpl> get copyWith =>
@@ -237,7 +244,10 @@ abstract class LoadToDoEvent implements TodoEvent {
 
   int get limit;
   int get offset;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TodoEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$LoadToDoEventImplCopyWith<_$LoadToDoEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -259,6 +269,8 @@ class __$$LoadMoreToDoEventImplCopyWithImpl<$Res>
       $Res Function(_$LoadMoreToDoEventImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TodoEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -298,7 +310,9 @@ class _$LoadMoreToDoEventImpl implements LoadMoreToDoEvent {
   @override
   int get hashCode => Object.hash(runtimeType, limit);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TodoEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$LoadMoreToDoEventImplCopyWith<_$LoadMoreToDoEventImpl> get copyWith =>
@@ -384,7 +398,10 @@ abstract class LoadMoreToDoEvent implements TodoEvent {
   const factory LoadMoreToDoEvent({final int limit}) = _$LoadMoreToDoEventImpl;
 
   int get limit;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TodoEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$LoadMoreToDoEventImplCopyWith<_$LoadMoreToDoEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -408,6 +425,8 @@ class __$$UpdateToDoEventImplCopyWithImpl<$Res>
       _$UpdateToDoEventImpl _value, $Res Function(_$UpdateToDoEventImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TodoEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -421,6 +440,8 @@ class __$$UpdateToDoEventImplCopyWithImpl<$Res>
     ));
   }
 
+  /// Create a copy of TodoEvent
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ToDoModelCopyWith<$Res> get todo {
@@ -454,7 +475,9 @@ class _$UpdateToDoEventImpl implements UpdateToDoEvent {
   @override
   int get hashCode => Object.hash(runtimeType, todo);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TodoEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$UpdateToDoEventImplCopyWith<_$UpdateToDoEventImpl> get copyWith =>
@@ -540,7 +563,10 @@ abstract class UpdateToDoEvent implements TodoEvent {
   const factory UpdateToDoEvent(final ToDoModel todo) = _$UpdateToDoEventImpl;
 
   ToDoModel get todo;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TodoEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UpdateToDoEventImplCopyWith<_$UpdateToDoEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -564,6 +590,8 @@ class __$$DeleteToDoEventImplCopyWithImpl<$Res>
       _$DeleteToDoEventImpl _value, $Res Function(_$DeleteToDoEventImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TodoEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -577,6 +605,8 @@ class __$$DeleteToDoEventImplCopyWithImpl<$Res>
     ));
   }
 
+  /// Create a copy of TodoEvent
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ToDoModelCopyWith<$Res> get todo {
@@ -610,7 +640,9 @@ class _$DeleteToDoEventImpl implements DeleteToDoEvent {
   @override
   int get hashCode => Object.hash(runtimeType, todo);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TodoEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DeleteToDoEventImplCopyWith<_$DeleteToDoEventImpl> get copyWith =>
@@ -696,7 +728,10 @@ abstract class DeleteToDoEvent implements TodoEvent {
   const factory DeleteToDoEvent(final ToDoModel todo) = _$DeleteToDoEventImpl;
 
   ToDoModel get todo;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TodoEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DeleteToDoEventImplCopyWith<_$DeleteToDoEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

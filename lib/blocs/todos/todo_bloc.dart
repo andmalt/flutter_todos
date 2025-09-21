@@ -1,6 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_todos/data/models/todo.dart';
-import 'package:flutter_todos/domain/entities/todo_entity.dart';
 import 'package:flutter_todos/domain/usercases/delete_todo.dart';
 import 'package:flutter_todos/domain/usercases/update_todo.dart';
 import '../../domain/usercases/get_todo.dart';
@@ -12,16 +11,14 @@ class ToDoBloc extends Bloc<TodoEvent, TodoState> {
   final UpdateToDo updateToDo;
   final DeleteTodo deleteTodo;
 
-  ToDoBloc(this.getToDos, this.updateToDo, this.deleteTodo)
-      : super(const TodoState.initial()) {
+  ToDoBloc(this.getToDos, this.updateToDo, this.deleteTodo) : super(const TodoState.initial()) {
     on<LoadToDoEvent>(_onLoadToDoEvent);
     on<LoadMoreToDoEvent>(_onLoadMoreToDoEvent);
     on<UpdateToDoEvent>(_onUpdateToDoEvent);
     on<DeleteToDoEvent>(_onDeleteToDoEvent);
   }
 
-  Future<void> _onLoadToDoEvent(
-      LoadToDoEvent event, Emitter<TodoState> emit) async {
+  Future<void> _onLoadToDoEvent(LoadToDoEvent event, Emitter<TodoState> emit) async {
     emit(const TodoState.loading());
     try {
       final todos = await getToDos(limit: event.limit, offset: event.offset);
@@ -45,8 +42,7 @@ class ToDoBloc extends Bloc<TodoEvent, TodoState> {
     }
   }
 
-  Future<void> _onLoadMoreToDoEvent(
-      LoadMoreToDoEvent event, Emitter<TodoState> emit) async {
+  Future<void> _onLoadMoreToDoEvent(LoadMoreToDoEvent event, Emitter<TodoState> emit) async {
     // Check that the status is `loaded`
     final currentState = state.maybeMap(
       loaded: (state) => state,
@@ -90,8 +86,7 @@ class ToDoBloc extends Bloc<TodoEvent, TodoState> {
     }
   }
 
-  Future<void> _onUpdateToDoEvent(
-      UpdateToDoEvent event, Emitter<TodoState> emit) async {
+  Future<void> _onUpdateToDoEvent(UpdateToDoEvent event, Emitter<TodoState> emit) async {
     try {
       final currentState = state.maybeMap(
         loaded: (state) => state,
@@ -102,7 +97,7 @@ class ToDoBloc extends Bloc<TodoEvent, TodoState> {
       final updatedTodos = currentState.todos.map((todo) {
         return todo.id == event.todo.id ? event.todo : todo;
       }).toList();
-      final todos = updatedTodos.map((e) => ToDoEntity.fromModel(e)).toList();
+      final todos = updatedTodos.map((model) => model.toEntity()).toList();
       final isUpdated = await updateToDo(todos);
       if (isUpdated) {
         emit(currentState.copyWith(todos: updatedTodos));
@@ -112,8 +107,7 @@ class ToDoBloc extends Bloc<TodoEvent, TodoState> {
     }
   }
 
-  Future<void> _onDeleteToDoEvent(
-      DeleteToDoEvent event, Emitter<TodoState> emit) async {
+  Future<void> _onDeleteToDoEvent(DeleteToDoEvent event, Emitter<TodoState> emit) async {
     final currentState = state.maybeMap(
       loaded: (state) => state,
       orElse: () => null,
@@ -123,9 +117,8 @@ class ToDoBloc extends Bloc<TodoEvent, TodoState> {
 
     try {
       // Remove todo from the list
-      final updatedTodos =
-          currentState.todos.where((todo) => todo.id != event.todo.id).toList();
-      final todo = ToDoEntity.fromModel(event.todo);
+      final updatedTodos = currentState.todos.where((todo) => todo.id != event.todo.id).toList();
+      final todo = event.todo.toEntity();
       final isDeleted = await deleteTodo(todo);
       if (isDeleted) {
         emit(currentState.copyWith(todos: updatedTodos));

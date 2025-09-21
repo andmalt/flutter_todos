@@ -16,19 +16,15 @@ class ToDoRepositoryImpl extends ToDoRepositories {
 
   @override
   Future<List<ToDoEntity>> getToDos({int limit = 20, int offset = 0}) async {
-    final localData =
-        await localDataSource.getToDos(limit: limit, offset: offset);
-    final entity =
-        localData.map((model) => ToDoEntity.fromModel(model)).toList();
+    final localData = await localDataSource.getToDos(limit: limit, offset: offset);
+    final entity = localData.map((model) => model.toEntity()).toList();
     if (localData.isNotEmpty || offset > 0) {
       return entity;
     }
     final remoteData = await apiDataSource.fetchToDos();
     await localDataSource.saveToDos(remoteData);
-    final dataSource =
-        await localDataSource.getToDos(limit: limit, offset: offset);
-    final newEntity =
-        dataSource.map((model) => ToDoEntity.fromModel(model)).toList();
+    final dataSource = await localDataSource.getToDos(limit: limit, offset: offset);
+    final newEntity = dataSource.map((model) => model.toEntity()).toList();
     return newEntity;
   }
 
